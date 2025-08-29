@@ -1,5 +1,3 @@
-# app1.py — simple version (no Top-K, no debug panel)
-
 import os
 import io
 import re
@@ -7,10 +5,9 @@ import pickle
 import numpy as np
 import streamlit as st
 
-# =========================
-# 1) Load the exact artifacts you trained
-# =========================
-ART_DIR = "artifacts"  # change to absolute path if you prefer
+# Load the exact artifacts you trained
+
+ART_DIR = "artifacts"
 TFIDF_PATH = os.path.join(ART_DIR, "tfidf.pkl")
 CLF_PATH = os.path.join(ART_DIR, "clf.pkl")
 
@@ -24,9 +21,8 @@ with open(TFIDF_PATH, "rb") as f:
 with open(CLF_PATH, "rb") as f:
     clf = pickle.load(f)
 
-# =========================
-# 2) Category mapping (must match training IDs)
-# =========================
+# Category mapping (must match training IDs)
+
 ID_TO_CATEGORY = {
     15: "Java Developer",
     23: "Testing",
@@ -56,9 +52,7 @@ ID_TO_CATEGORY = {
 }
 
 
-# =========================
-# 3) Cleaner (identical to training)
-# =========================
+# Cleaner (identical to training)
 def clean_resume(text: str) -> str:
     t = text if isinstance(text, str) else str(text)
     t = re.sub(r"http\S+|www\.\S+", " ", t)
@@ -71,9 +65,7 @@ def clean_resume(text: str) -> str:
     return t
 
 
-# =========================
-# 4) Robust text extraction
-# =========================
+#  text extraction
 def read_uploaded_text(upload):
     """Return (text, parser_used) so we can gate on real parsing for PDFs."""
     name = (upload.name or "").lower()
@@ -129,9 +121,7 @@ def read_uploaded_text(upload):
     return "", "raw-decode:failed"
 
 
-# =========================
-# 5) Streamlit UI (minimal)
-# =========================
+# Streamlit UI (minimal)
 def main():
     st.title("Resume Screening App with ML")
     upload_file = st.file_uploader("Upload your Resume", type=["pdf", "txt", "docx"])

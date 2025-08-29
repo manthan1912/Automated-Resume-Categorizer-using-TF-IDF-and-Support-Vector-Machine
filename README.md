@@ -1,4 +1,4 @@
-# Resume Screening ML App (TF-IDF + LinearSVC)
+# Automated-Resume-Categorizer-using-TF-IDF-and-Support-Vector-Machine
 
 Classify resumes into common job categories using a simple, fast, and reliable NLP pipeline:
 **clean text → TF-IDF → LinearSVC**.  
@@ -18,14 +18,12 @@ Train the model on your CSV, then run a minimal **Streamlit** app to predict fro
 - `resume_classifier_notebook.ipynb` — Notebook to train/evaluate and export the two artifacts
 - `data.csv` — Your training data (columns: **Category**, **Resume**)
 
-> You may also have `Untitled-1.py` from an earlier notebook export; prefer using the notebook above for clean training.
-
 ---
 
 ## 🚀 Quickstart
 
 ```bash
-# 1) Create env & install deps
+# 1) Create env & install dependencies
 python -m venv .venv
 source .venv/bin/activate        # on Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -104,10 +102,6 @@ streamlit run app1.py
 ```
 
 - Upload **text-based** PDF, TXT, or DOCX.  
-- For scanned PDFs (images), run OCR first:
-  ```
-  ocrmypdf input.pdf output.pdf
-  ```
 - The app blocks predictions if too little text is extracted (prevents garbage results).
 
 ---
@@ -122,13 +116,12 @@ See `requirements.txt`. Key ones:
 - **(Optional) EDA:** `matplotlib`, `seaborn`
 
 Install with:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
-
-## 🐛 Troubleshooting
 
 - **Wrong predictions on PDFs**
   - Ensure the app uses a *real* parser (PyMuPDF/PyPDF2/pdfminer). If not, install the parsers from `requirements.txt` and make sure Streamlit runs in the same environment.
@@ -139,6 +132,7 @@ pip install -r requirements.txt
 
 - **Windows path errors in the notebook (`unicodeescape`)**
   - Use raw strings or forward slashes:
+
     ```python
     pdf_path = r"E:\path\to\file.pdf"
     # or
@@ -166,12 +160,3 @@ pip install -r requirements.txt
 ```
 
 ---
-
-## ✅ Notes
-
-- The app returns a **single best category** (no Top-K UI).
-- If you prefer a single artifact, you can wrap cleaner+TF-IDF+SVC in a `Pipeline` and save `model.joblib`; the app can then load one file.
-
----
-
-Happy building! 🚀
